@@ -6,9 +6,11 @@ import { ThemeProvider } from '@material-ui/core';
 import theme from './theme';
 import { BrowserRouter as Router } from 'react-router-dom';
 
+
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
+
       <Router>
         <App />
       </Router>
@@ -16,4 +18,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
