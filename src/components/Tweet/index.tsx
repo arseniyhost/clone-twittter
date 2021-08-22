@@ -25,13 +25,13 @@ export const Tweet: React.FC<TweetProps> = ({ text, user, classes }: TweetProps)
                     <Avatar className={classes.tweetAvatar} alt={`Аватарка пользователя ${user.username}`} src={user.avatarUrl} />
                 </Grid>
                 <Grid item xs={11}>
-                    <Typography style={{ fontSize: 16, marginLeft: 10}}>
-                        <b>{user.fullname}</b> 
+                    <Typography style={{ fontSize: 16, marginLeft: 10 }}>
+                        <b>{user.fullname}</b>
                         <span className={classes.tweetUserName}>@{user.username}</span>
                         <b className={classes.tweetUserName}> · </b>
                         <span className={classes.tweetUserName}>1ч</span>
                     </Typography>
-                    <Typography style={{ fontSize: 16, marginLeft: 10}} variant="body1">
+                    <Typography style={{ fontSize: 16, marginLeft: 10 }} variant="body1">
                         {text}
                     </Typography>
                 </Grid>

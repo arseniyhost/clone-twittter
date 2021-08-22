@@ -23,48 +23,37 @@ export const SideMenu: React.FC<SideMenuProps> = ({ classes }: SideMenuProps): R
             </li>
             <li className={classes.sideMenuItem}>
                 <div>
-
                     <SearchIcon className={classes.sideMenuListItemIcon} />
-
                     <Typography className={classes.sideMenuListItemLabel} variant="h6">Поиск</Typography>
                 </div>
             </li>
             <li className={classes.sideMenuItem}>
                 <div>
                     <NotificationsIcon className={classes.sideMenuListItemIcon} />
-
                     <Typography className={classes.sideMenuListItemLabel} variant="h6">Уведомления</Typography>
                 </div>
             </li>
             <li className={classes.sideMenuItem}>
                 <div>
-
                     <MailIcon className={classes.sideMenuListItemIcon} />
-
                     <Typography className={classes.sideMenuListItemLabel} variant="h6">Сообщения</Typography>
                 </div>
             </li>
             <li className={classes.sideMenuItem}>
                 <div>
-
                     <BookmarkIcon className={classes.sideMenuListItemIcon} />
-
                     <Typography className={classes.sideMenuListItemLabel} variant="h6">Закладки</Typography>
                 </div>
             </li>
             <li className={classes.sideMenuItem}>
                 <div>
-
                     <ListIcon className={classes.sideMenuListItemIcon} />
-
                     <Typography className={classes.sideMenuListItemLabel} variant="h6">Список</Typography>
                 </div>
             </li>
             <li className={classes.sideMenuItem}>
                 <div>
-
                     <UserIcon className={classes.sideMenuListItemIcon} />
-
                     <Typography className={classes.sideMenuListItemLabel} variant="h6">Профиль</Typography>
                 </div>
             </li>
