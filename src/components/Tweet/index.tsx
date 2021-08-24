@@ -1,11 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Paper, Typography, Avatar, IconButton } from '@material-ui/core';
+
 import CommentIcon from '@material-ui/icons/ChatBubbleOutline';
 import RepeatIcon from '@material-ui/icons/Repeat';
 import LikeIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
-import { useHomeStyles } from '../../pages/Home';
+
+import { Paper, Typography, Avatar, IconButton } from '@material-ui/core';
+import { useHomeStyles } from '../../pages/Home/theme';
 
 interface TweetProps {
     classes: ReturnType<typeof useHomeStyles>;
@@ -21,7 +23,6 @@ export const Tweet: React.FC<TweetProps> = ({ text, user, classes }: TweetProps)
     return (
         <Paper className={classNames(classes.tweetsHeader, classes.tweet)} variant="outlined">
             <Avatar className={classes.tweetAvatar} alt={`Аватарка пользователя ${user.username}`} src={user.avatarUrl} />
-
             <div>
                 <Typography style={{ fontSize: 16, marginLeft: 10 }}>
                     <b>{user.fullname}</b>
@@ -32,7 +33,6 @@ export const Tweet: React.FC<TweetProps> = ({ text, user, classes }: TweetProps)
                 <Typography style={{ fontSize: 16, marginLeft: 10 }} variant="body1">
                     {text}
                 </Typography>
-
                 <div className={classes.tweetFooter}>
                     <div>
                         <IconButton>
@@ -60,7 +60,6 @@ export const Tweet: React.FC<TweetProps> = ({ text, user, classes }: TweetProps)
                     </div>
                 </div>
             </div>
-
         </Paper>
     )
 }

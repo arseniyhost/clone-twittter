@@ -5,23 +5,29 @@ import EmojiIcon from '@material-ui/icons/EmojiEmotionsOutlined';
 import classNames from 'classnames';
 
 import { Avatar, Button, CircularProgress, IconButton, TextareaAutosize } from '@material-ui/core'
-import { useHomeStyles } from '../../pages/Home';
+import { useHomeStyles } from '../../pages/Home/theme';
 
 interface AddTweetFormProps {
     classes: ReturnType<typeof useHomeStyles>;
+    maxRows?: number;
 }
 
 const MAX_LENGTH = 280;
 
-export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes }: AddTweetFormProps): React.ReactElement => {
+export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows }: AddTweetFormProps): React.ReactElement => {
     const [text, setText] = useState<string>('');
     const textLimitProgress = Math.round((text.length / MAX_LENGTH) * 100);
-    const limit = MAX_LENGTH - text.length
+    const textLimitNumbers = MAX_LENGTH - text.length;
+    const conditionProgress = text.length >= MAX_LENGTH;
 
-    const handleChangeTextarea = (e: React.FormEvent<HTMLTextAreaElement>) => {
+    const handleChangeTextarea = (e: React.FormEvent<HTMLTextAreaElement>): void => {
         if (e.currentTarget) {
             setText(e.currentTarget.value);
         }
+    }
+
+    const handleClickTweet = (): void => {
+        setText('');
     }
 
 
@@ -38,6 +44,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes }: AddTweetF
                     className={classes.addFormTextarea}
                     placeholder="Что происходит?"
                     value={text}
+                    maxRows={maxRows}
                 />
             </div>
             <div className={classes.addFormBottom}>
@@ -52,14 +59,14 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes }: AddTweetF
                 <div className={classes.addFormBottomRight}>
                     {
                         text && (<>
-                            <span>{limit}</span>
+                            <span>{textLimitNumbers}</span>
                             <div className={classes.addFormCircleProgress}>
-                                <CircularProgress 
-                                variant="static" 
-                                thickness={5} 
-                                size={20} 
-                                value={textLimitProgress < 100 ? textLimitProgress : 100}
-                                style={ textLimitProgress >= 100 ? {color: 'red'} : {}}
+                                <CircularProgress
+                                    variant="static"
+                                    thickness={5}
+                                    size={20}
+                                    value={conditionProgress ? 100 : textLimitProgress}
+                                    style={conditionProgress ? { color: 'red' } : undefined}
                                 />
                                 <CircularProgress
                                     style={{ color: 'rgba(0, 0, 0, 0.1)' }}
@@ -71,7 +78,12 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes }: AddTweetF
                             </div>
                         </>)
                     }
-                    <Button disabled={textLimitProgress >= 100} variant="contained" color="primary">
+                    <Button
+                    onClick={handleClickTweet}
+                    disabled={conditionProgress} 
+                    variant="contained" 
+                    color="primary"
+                    >
                         Твитнуть
                     </Button>
                 </div>
