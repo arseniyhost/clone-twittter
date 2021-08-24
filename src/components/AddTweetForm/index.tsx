@@ -30,7 +30,6 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows }: 
         setText('');
     }
 
-
     return (
         <div className={classes.addForm}>
             <div className={classes.addFormBody}>
@@ -79,10 +78,10 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows }: 
                         </>)
                     }
                     <Button
-                    onClick={handleClickTweet}
-                    disabled={conditionProgress} 
-                    variant="contained" 
-                    color="primary"
+                        onClick={handleClickTweet}
+                        disabled={conditionProgress}
+                        variant="contained"
+                        color="primary"
                     >
                         Твитнуть
                     </Button>
