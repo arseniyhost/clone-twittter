@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import {
-    Avatar, Button, Container, Divider, Grid,
+    Avatar, Button, CircularProgress, Container, Divider, Grid,
     InputAdornment, List, ListItem, ListItemAvatar,
     ListItemText, Paper, Typography
 } from '@material-ui/core';
@@ -13,9 +13,19 @@ import { SideMenu } from '../../components/SideMenu';
 import { AddTweetForm } from '../../components/AddTweetForm';
 import { useHomeStyles } from './theme';
 import { SearchTextField } from '../../components/SearchTextField.tsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTweets } from '../../store/ducks/tweets/actionCreators';
+import { selectIsTweetsLoading, selectTweetsItems } from '../../store/ducks/tweets/selectors';
 
 const Home: React.FC = (): React.ReactElement => {
+    const dispatch = useDispatch();
     const classes = useHomeStyles();
+    const tweets = useSelector(selectTweetsItems);
+    const isLoading = useSelector(selectIsTweetsLoading);
+
+    useEffect(() => {
+        dispatch(getTweets());
+    }, [dispatch])
 
     return (
         <Container className={classes.wrapper} maxWidth="md">
@@ -33,18 +43,17 @@ const Home: React.FC = (): React.ReactElement => {
                             <div className={classes.addFormBottomLine} />
                         </Paper>
                         {
-                            [
-                                ...new Array(10).fill(
-                                    <Tweet text="On August 6th we witnessed history. SpaceX turned an idea into reality. After just under 2 years the first Starship prototype was stacked, proving that SpaceX wants to make humanity a multi-planetary species."
-                                        classes={classes}
-                                        user={{
-                                            username: 'elonmask',
-                                            fullname: 'Elon Mask',
-                                            avatarUrl: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80'
-                                        }}
-                                    />
-                                )
-                            ]
+                            isLoading ? (
+                                <div className={classes.tweetsCentred}>
+                                    <CircularProgress />
+                                </div>
+                            ) :
+                            tweets.map((tweet) => (
+                                <Tweet key={tweet._id} text={tweet.text}
+                                    classes={classes}
+                                    user={tweet.user}
+                                />
+                            ))
                         }
                     </Paper>
                 </Grid>

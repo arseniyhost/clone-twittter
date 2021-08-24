@@ -1,7 +1,7 @@
 import { makeStyles, Theme } from '@material-ui/core'
 import { grey } from '@material-ui/core/colors'
 
-export const useHomeStyles = makeStyles((theme : Theme) => ({
+export const useHomeStyles = makeStyles((theme: Theme) => ({
     wrapper: {
         height: '100vh'
     },
@@ -79,13 +79,17 @@ export const useHomeStyles = makeStyles((theme : Theme) => ({
             backgroundColor: 'rgba(245, 248, 250)',
         }
     },
+    tweetsCentred: {
+        marginTop: 50,
+        textAlign: 'center',
+    },
     tweetAvatar: {
         width: 37,
         height: 37,
     },
     tweetFooter: {
         display: 'flex',
-        justifyContent: 'space-around',
+        justifyContent: 'flex-start',
         width: 450,
         position: 'relative',
         left: -12
