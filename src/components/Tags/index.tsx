@@ -25,19 +25,21 @@ export const Tags: React.FC<TagsProps> = ({ classes }: TagsProps): React.ReactEl
             <List>
                 {
                     isLoaded && tags.map(tag => {
-                        return <ListItem key={tag._id} className={classes.rightSideBlockItem}>
-                            <NavLink to={`/search?=q=${tag.name}`}>
-                                <ListItemText
-                                    primary={tag.name}
-                                    secondary={
-                                        <Typography component="span" variant="body1">
-                                            Твитов: {tag.count}
-                                        </Typography>
-                                    }
-                                />
-                            </NavLink>
-                            <Divider component="li" />
-                        </ListItem>
+                        return <React.Fragment key={tag._id}>
+                            <ListItem  className={classes.rightSideBlockItem}>
+                                <NavLink to={`/search?=q=${tag.name}`}>
+                                    <ListItemText
+                                        primary={tag.name}
+                                        secondary={
+                                            <Typography component="span" variant="body1">
+                                                Твитов: {tag.count}
+                                            </Typography>
+                                        }
+                                    />
+                                </NavLink>
+                                <Divider component="li" />
+                            </ListItem>
+                        </React.Fragment>
                     })
                 }
             </List>

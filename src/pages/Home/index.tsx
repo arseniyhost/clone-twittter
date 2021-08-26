@@ -19,6 +19,7 @@ import { selectIsTweetsLoading, selectTweetsItems } from '../../store/ducks/twee
 import { getTags } from '../../store/tags/actionCreators';
 import { Tags } from '../../components/Tags';
 import { Route } from 'react-router-dom';
+import { BackButton } from '../../components/BackButton';
 
 const Home: React.FC = (): React.ReactElement => {
     const dispatch = useDispatch();
@@ -33,19 +34,33 @@ const Home: React.FC = (): React.ReactElement => {
 
     return (
         <Container className={classes.wrapper} maxWidth="md">
-            <Grid container spacing={1}>
+            <Grid container spacing={2}>
                 <Grid sm={1} md={3} item>
                     <SideMenu classes={classes} />
                 </Grid>
                 <Grid sm={8} md={6} item>
                     <Paper className={classes.tweetsWrapper} variant="outlined">
-                        <Paper className={classes.tweetsHeader} variant="outlined">
-                            <Typography variant="h6">Главная</Typography>
+                        <Paper className={classes.tweetsMainHeader} variant="outlined">
+                            <Route path={'/home/:any'}>
+                                <BackButton />
+                            </Route>
+                            <Route path={["/home", "/home/search"]} exact>
+
+                                <Typography variant="h6">Твиты</Typography>
+
+                            </Route>
+                            <Route path='/home/tweet'>
+                                <Typography variant="h6">Твитнуть</Typography>
+                            </Route>
                         </Paper>
-                        <Paper>
-                            <AddTweetForm classes={classes} />
-                            <div className={classes.addFormBottomLine} />
-                        </Paper>
+                        <Route path={['/home', '/home/search']} exact>
+                            <Paper>
+                                <div className={classes.addForm}>
+                                    <AddTweetForm classes={classes} />
+                                    <div className={classes.addFormBottomLine} />
+                                </div>
+                            </Paper>
+                        </Route>
                         <Route path="/home" exact>
                             {
                                 isLoading ? (
@@ -54,7 +69,7 @@ const Home: React.FC = (): React.ReactElement => {
                                     </div>
                                 ) :
                                     tweets.map((tweet) => (
-                                        <Tweet key={tweet._id} text={tweet.text}
+                                        <Tweet id={tweet._id} key={tweet._id} text={tweet.text}
                                             classes={classes}
                                             user={tweet.user}
                                         />
