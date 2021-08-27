@@ -169,12 +169,12 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
     addFormBody: {
         padding: 20,
         display: 'flex',
-        width: '100%',
     },
     addFormBottom: {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
+        padding: "0 20px"
     },
     addFormBottomActions: {
         marginTop: 10,
