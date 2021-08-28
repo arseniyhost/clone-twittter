@@ -10,11 +10,12 @@ import { useHomeStyles } from '../../pages/Home/theme';
 interface AddTweetFormProps {
     classes: ReturnType<typeof useHomeStyles>;
     maxRows?: number;
+    style?: any
 }
 
 const MAX_LENGTH = 280;
 
-export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows }: AddTweetFormProps): React.ReactElement => {
+export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows, style }: AddTweetFormProps): React.ReactElement => {
     const [text, setText] = useState<string>('');
     const textLimitProgress = Math.round((text.length / MAX_LENGTH) * 100);
     const textLimitNumbers = MAX_LENGTH - text.length;
@@ -32,7 +33,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows }: 
 
     return (
         <div className={classes.addForm}>
-            <div className={classes.addFormBody}>
+            <div style={style} className={classes.addFormBody}>
                 <Avatar
                     className={classes.tweetAvatar}
                     alt={`Аватарка пользователя UserAvatar`}
@@ -61,7 +62,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows }: 
                             <span>{textLimitNumbers}</span>
                             <div className={classes.addFormCircleProgress}>
                                 <CircularProgress
-                                    variant="static"
+                                    variant="determinate"
                                     thickness={5}
                                     size={20}
                                     value={conditionProgress ? 100 : textLimitProgress}
@@ -69,7 +70,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows }: 
                                 />
                                 <CircularProgress
                                     style={{ color: 'rgba(0, 0, 0, 0.1)' }}
-                                    variant="static"
+                                    variant="determinate"
                                     size={20}
                                     thickness={5}
                                     value={100}

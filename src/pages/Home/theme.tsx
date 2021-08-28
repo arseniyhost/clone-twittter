@@ -58,7 +58,25 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
         borderRadius: 0,
         height: "100%",
         borderTop: 0,
-        borderBottom: 0
+        borderBottom: 0,
+    },
+    tweetWrapper: {
+        color: 'inherit',
+        textDecoration: "none"
+    },
+    tweetsMainHeader: {
+        borderTop: 0,
+        borderleft: 0,
+        borderRight: 0,
+        borderRadius: 0,
+        display: "flex",
+        alignItems: 'center',
+
+        padding: "10px 15px",
+
+        '& h6': {
+            fontWeight: 700,
+        }
     },
     tweetsHeader: {
         borderTop: 0,
@@ -67,12 +85,17 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
         borderRadius: 0,
 
         padding: "10px 15px",
-
         '& h6': {
             fontWeight: 700,
         }
     },
+    tweetIconBack: {
+        marginRight: 15
+    },
     tweet: {
+        display: "flex",
+        alignItems: "flex-start",
+        paddingLeft: 20,
         paddingTop: 20,
         '&:hover': {
             cursor: 'pointer',
@@ -89,8 +112,7 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
     },
     tweetFooter: {
         display: 'flex',
-        justifyContent: 'flex-start',
-        width: 450,
+        justifyContent: "space-between",
         position: 'relative',
         left: -12
     },
@@ -110,7 +132,6 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
             paddingTop: 0,
         }
     },
-
     rightSideBlockHeader: {
         borderTop: 0,
         borderLeft: 0,
@@ -136,18 +157,23 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
         '&:hover': {
             backgroundColor: '#edf3f6',
         },
+        "& a": {
+            color: "inherit",
+            textDecoration: "none"
+        }
     },
     addForm: {
-        padding: 20,
+        width: 450
     },
     addFormBody: {
+        padding: 20,
         display: 'flex',
-        width: '100%',
     },
     addFormBottom: {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
+        padding: "0 20px"
     },
     addFormBottomActions: {
         marginTop: 10,

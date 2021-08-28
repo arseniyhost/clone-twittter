@@ -16,6 +16,10 @@ import { SearchTextField } from '../../components/SearchTextField.tsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTweets } from '../../store/ducks/tweets/actionCreators';
 import { selectIsTweetsLoading, selectTweetsItems } from '../../store/ducks/tweets/selectors';
+import { getTags } from '../../store/tags/actionCreators';
+import { Tags } from '../../components/Tags';
+import { Route } from 'react-router-dom';
+import { BackButton } from '../../components/BackButton';
 
 const Home: React.FC = (): React.ReactElement => {
     const dispatch = useDispatch();
@@ -25,36 +29,53 @@ const Home: React.FC = (): React.ReactElement => {
 
     useEffect(() => {
         dispatch(getTweets());
+        dispatch(getTags())
     }, [dispatch])
 
     return (
         <Container className={classes.wrapper} maxWidth="md">
-            <Grid container spacing={1}>
+            <Grid container spacing={2}>
                 <Grid sm={1} md={3} item>
                     <SideMenu classes={classes} />
                 </Grid>
                 <Grid sm={8} md={6} item>
                     <Paper className={classes.tweetsWrapper} variant="outlined">
-                        <Paper className={classes.tweetsHeader} variant="outlined">
-                            <Typography variant="h6">Главная</Typography>
+                        <Paper className={classes.tweetsMainHeader} variant="outlined">
+                            <Route path={'/home/:any'}>
+                                <BackButton />
+                            </Route>
+                            <Route path={["/home", "/home/search"]} exact>
+
+                                <Typography variant="h6">Твиты</Typography>
+
+                            </Route>
+                            <Route path='/home/tweet'>
+                                <Typography variant="h6">Твитнуть</Typography>
+                            </Route>
                         </Paper>
-                        <Paper>
-                            <AddTweetForm classes={classes} />
-                            <div className={classes.addFormBottomLine} />
-                        </Paper>
-                        {
-                            isLoading ? (
-                                <div className={classes.tweetsCentred}>
-                                    <CircularProgress />
+                        <Route path={['/home', '/home/search']} exact>
+                            <Paper>
+                                <div className={classes.addForm}>
+                                    <AddTweetForm classes={classes} />
+                                    <div className={classes.addFormBottomLine} />
                                 </div>
-                            ) :
-                            tweets.map((tweet) => (
-                                <Tweet key={tweet._id} text={tweet.text}
-                                    classes={classes}
-                                    user={tweet.user}
-                                />
-                            ))
-                        }
+                            </Paper>
+                        </Route>
+                        <Route path="/home" exact>
+                            {
+                                isLoading ? (
+                                    <div className={classes.tweetsCentred}>
+                                        <CircularProgress />
+                                    </div>
+                                ) :
+                                    tweets.map((tweet) => (
+                                        <Tweet id={tweet._id} key={tweet._id} text={tweet.text}
+                                            classes={classes}
+                                            user={tweet.user}
+                                        />
+                                    ))
+                            }
+                        </Route>
                     </Paper>
                 </Grid>
                 <Grid sm={3} md={3} item>
@@ -71,45 +92,7 @@ const Home: React.FC = (): React.ReactElement => {
                             }}
                             fullWidth
                         />
-                        <Paper className={classes.rightSideBlock}>
-                            <Paper className={classes.rightSideBlockHeader}>
-                                <b>Актуальные темы</b>
-                            </Paper>
-                            <List>
-                                <ListItem className={classes.rightSideBlockItem}>
-                                    <ListItemText
-                                        primary="Bitcoin"
-                                        secondary={
-                                            <Typography component="span" variant="body1">
-                                                Твитов: 4 456
-                                            </Typography>
-                                        }
-                                    />
-                                </ListItem>
-                                <Divider component="li" />
-                                <ListItem className={classes.rightSideBlockItem}>
-                                    <ListItemText
-                                        primary="#ukraine"
-                                        secondary={
-                                            <Typography component="span" variant="body1">
-                                                Твитов: 10 234
-                                            </Typography>
-                                        }
-                                    />
-                                </ListItem>
-                                <Divider component="li" />
-                                <ListItem className={classes.rightSideBlockItem}>
-                                    <ListItemText
-                                        primary="#короновирус"
-                                        secondary={
-                                            <Typography component="span" variant="body2">
-                                                Твитов: 110 390
-                                            </Typography>
-                                        }
-                                    />
-                                </ListItem>
-                            </List>
-                        </Paper>
+                        <Tags classes={classes} />
                         <Paper className={classes.rightSideBlock}>
                             <Paper className={classes.rightSideBlockHeader}>
                                 <b>Кого читать</b>
