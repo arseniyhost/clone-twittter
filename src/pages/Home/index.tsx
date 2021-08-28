@@ -16,7 +16,7 @@ import { SearchTextField } from '../../components/SearchTextField.tsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTweets } from '../../store/ducks/tweets/actionCreators';
 import { selectIsTweetsLoading, selectTweetsItems } from '../../store/ducks/tweets/selectors';
-import { getTags } from '../../store/tags/actionCreators';
+import { getTags } from '../../store/ducks/tags/actionCreators';
 import { Tags } from '../../components/Tags';
 import { Route } from 'react-router-dom';
 import { BackButton } from '../../components/BackButton';

@@ -3,7 +3,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { useHomeStyles } from '../../pages/Home/theme'
-import { selectIsTagsLoaded, selectTagsItems } from '../../store/tags/selectors'
+import { selectIsTagsLoaded, selectTagsItems } from '../../store/ducks/tags/selectors'
 
 interface TagsProps {
     classes: ReturnType<typeof useHomeStyles>
