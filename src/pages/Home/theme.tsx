@@ -132,7 +132,6 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
             paddingTop: 0,
         }
     },
-
     rightSideBlockHeader: {
         borderTop: 0,
         borderLeft: 0,
@@ -164,7 +163,7 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
         }
     },
     addForm: {
-    
+        width: 450
     },
     addFormBody: {
         padding: 20,
